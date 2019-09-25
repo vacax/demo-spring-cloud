@@ -12,7 +12,8 @@ import org.springframework.context.annotation.Bean;
 @EnableDiscoveryClient
 public class EstudianteServicesApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        Thread.sleep(10000);
         SpringApplication.run(EstudianteServicesApplication.class, args);
     }
 

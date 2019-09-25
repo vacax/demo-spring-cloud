@@ -21,7 +21,6 @@ services:
       - servidor-config = config-server
       - spring.cloud.config.uri=http://config-server:8888
 
-
   zuul-server:
     build: zuul-server/.
     ports:
@@ -35,7 +34,7 @@ services:
       - servidor-eureka = eureka-server
       - servidor-config = config-server
       - spring.cloud.config.uri=http://config-server:8888
-      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka
 
   estudiante-services:
     build: estudiante-services/.
