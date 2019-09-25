@@ -1,0 +1,55 @@
+#Archivo para arrancar el proyecto utilizando Docker Compose
+version: '3.7'
+services:
+
+  config-server:
+    build: config-server/.
+    ports:
+      - 8888:8888
+    networks:
+      - red-spring-cloud
+
+  eureka-server:
+    build: eureka-server/.
+    ports:
+      - 8761:8761
+    networks:
+      - red-spring-cloud
+    depends_on:
+      - config-server
+    environment:
+      - servidor-config = config-server
+      - spring.cloud.config.uri=http://config-server:8888
+
+
+  zuul-server:
+    build: zuul-server/.
+    ports:
+      - 8080:8080
+    networks:
+      - red-spring-cloud
+    depends_on:
+      - config-server
+      - eureka-server
+    environment:
+      - servidor-eureka = eureka-server
+      - servidor-config = config-server
+      - spring.cloud.config.uri=http://config-server:8888
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+
+  estudiante-services:
+    build: estudiante-services/.
+    networks:
+      - red-spring-cloud
+    depends_on:
+      - config-server
+      - eureka-server
+      - zuul-server
+    environment:
+      - servidor-eureka = eureka-server
+      - servidor-config = config-server
+      - spring.cloud.config.uri=http://config-server:8888
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+      
+networks:
+  red-spring-cloud:

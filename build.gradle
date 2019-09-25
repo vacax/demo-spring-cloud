@@ -1,0 +1,16 @@
+plugins {
+    id 'application'
+}
+
+group 'edu.pucmm'
+version '1.0-SNAPSHOT'
+
+allprojects {
+    //Ejemplo de tarea.
+    task hola {
+        doLast { task ->
+            println "Soy el proyecto $task.project.name"
+        }
+    }
+}
+

@@ -1,0 +1,5 @@
+rootProject.name = 'demo-spring-cloud'
+
+// Incluyendo los proyectos que dependen del proceso.
+include 'config-server', 'eureka-server', 'zuul-server', 'estudiante-services'
+

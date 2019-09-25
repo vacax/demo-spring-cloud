@@ -1,0 +1,6 @@
+# openjdk:8-jdk-alpine es una imagen de Java 8 muy ligera.
+FROM openjdk:8-jdk-alpine
+LABEL maintainer="Carlos Camacho <ca.camacho@ce.pucmm.edu.do>"
+EXPOSE 8888
+COPY build/libs/*.jar mi_app.jar
+ENTRYPOINT ["java", "-jar", "mi_app.jar"]
