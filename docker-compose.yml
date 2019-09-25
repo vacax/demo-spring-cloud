@@ -20,6 +20,7 @@ services:
     environment:
       - servidor-config = config-server
       - spring.cloud.config.uri=http://config-server:8888
+      - eureka.instance.hostname=eureka-server
 
   zuul-server:
     build: zuul-server/.
@@ -35,6 +36,7 @@ services:
       - servidor-config = config-server
       - spring.cloud.config.uri=http://config-server:8888
       - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
 
   estudiante-services:
     build: estudiante-services/.
